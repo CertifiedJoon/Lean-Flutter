@@ -71,8 +71,168 @@ void nullExample(String? firstName, String? middleName, String? lastName) {
   // print(firstNoneNullValue);
 
   String? nullableName = firstName;
+  // checks if left side is null. if so assign right to left.
   nullableName ??= lastName ?? middleName;
   print(nullableName);
+}
+
+void conditionalExecution() {
+  // ? conditional operator allows us to use nullable elements.
+
+  List<String>? names = null;
+  final numberOfNames = names?.length ?? 0;
+}
+
+//give string value a programatic variable.
+enum PersonProperties { firstName, lastName, age }
+
+void enumerationExample() {
+  print(PersonProperties.firstName);
+}
+
+enum AnimalType { cat, dog, bunny, unknown }
+
+void enumType(AnimalType type) {
+  switch (type) {
+    case AnimalType.cat:
+      print("cat");
+      break;
+    case AnimalType.bunny:
+      print('bunny');
+      break;
+    case AnimalType.dog:
+      print('dog');
+      break;
+    default:
+      print('what is this');
+  }
+}
+
+class Person {
+  // once final variable takes its first value, it cannot be changed.
+  final String name;
+
+  // constructor
+  Person(this.name);
+
+  void run() {
+    print('running');
+  }
+
+  void breath() {
+    print('breathing');
+  }
+}
+
+class Asian extends Person {
+  Asian(super.name);
+
+  void nationality() {
+    print('korean');
+  }
+}
+
+void classExample() {
+  // const variable cannot be instantiated from non-const class, but final can!
+  final james = Person('james');
+  james.run();
+  print(james.name);
+
+  final joon = Asian('joon');
+  print(joon.name);
+  joon.nationality();
+}
+
+class Cat {
+  final String name;
+  Cat(this.name);
+
+  // factory made easy!!!
+  factory Cat.dani() {
+    return Cat('dani');
+  }
+
+  // override super class || covariant = righthand side.
+  @override
+  bool operator ==(covariant Cat other) => other.name == name;
+
+  // get identifier
+  @override
+  int get hashCode => name.hashCode;
+}
+
+void factoryExample() {
+  // no factory
+  final dani = Cat('dani');
+  print(dani.name);
+
+  //factory
+  final daniFactory = Cat.dani();
+  print(daniFactory.name);
+}
+
+class Dog {
+  final String name;
+  Dog(this.name);
+}
+
+// extending a class outside class! this can be useful! effect is universal.
+extension Run on Dog {
+  void run() {
+    print('Dog $name is running');
+  }
+}
+
+void extensionExample() {
+  final wof = Dog('woffer');
+  print(wof.name);
+  wof.run();
+}
+
+// async programming
+void futureExample() async {
+  Future<int> heavyFeature(int a) {
+    return Future.delayed(Duration(seconds: 3), () => a * 2);
+  }
+
+  final result = await heavyFeature(1);
+  print(result);
+}
+
+void streamExample() async {
+  Stream<String> getName() {
+    return Stream.periodic(const Duration(seconds: 1), (value) {
+      return 'Foo';
+    });
+  }
+
+  await for (final value in getName()) {
+    print(value);
+  }
+}
+
+void generatorExample() {
+  Iterable<int> getOnetoThreeSync() sync* {
+    for (int i = 0; i < 3; i++) {
+      yield i + 1;
+    }
+  }
+
+  for (final value in getOnetoThreeSync()) {
+    print(value);
+  }
+}
+
+class Pair<T> {
+  final T value1;
+  final T value2;
+
+  Pair(this.value1, this.value2);
+}
+
+void genericExample() {
+  final pair = Pair<int>(1, 2);
+  print(pair.value2);
 }
 
 class MyApp extends StatelessWidget {
@@ -81,7 +241,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    nullExample(null, 'Joon', null);
+    genericExample();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

@@ -1,0 +1,48 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "flutterstarter",
+      "cwd": "flutterstarter",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "flutterstarter (profile mode)",
+      "cwd": "flutterstarter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "flutterstarter (release mode)",
+      "cwd": "flutterstarter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "learningdart",
+      "cwd": "learningdart",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "learningdart (profile mode)",
+      "cwd": "learningdart",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "learningdart (release mode)",
+      "cwd": "learningdart",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "937417541985",
+    "project_id": "flutter-tutorial-dreamers",
+    "storage_bucket": "flutter-tutorial-dreamers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937417541985:android:f50e6eacc04de4a3fc1d20",
+        "android_client_info": {
+          "package_name": "com.example.fluttertutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937417541985-f8itlvho3f278pctj0dgc4qk21t17rs2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9ctvzNTSFMRJQwu3TKJmFrz5eZOho42A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937417541985-f8itlvho3f278pctj0dgc4qk21t17rs2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "937417541985-621ns30i4oq5hl1rahco46amvco23urv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fluttertutorial"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
