@@ -46,6 +46,7 @@ dependencies:
   firebase_auth: ^4.2.6
   firebase_analytics: ^10.1.1
   cloud_firestore: ^4.4.0
+  ionicons: ^0.2.2
 
 # depedency only on development version.
 dev_dependencies:
@@ -73,6 +74,8 @@ flutter:
     - family: Flamingo
       fonts:
         - asset: fonts/Flamingo.ttf
+  assets:
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

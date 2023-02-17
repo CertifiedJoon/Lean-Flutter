@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutterstarter/presentation/flamingo_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:flutterstarter/components/custon_bottom_navbar.dart';
+import 'package:flutterstarter/components/header_widget.dart';
+import 'package:flutterstarter/pages/details.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'components/custom_card.dart';
+import 'constants/color.dart';
+import 'test_data/success_info.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,46 +34,108 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  late final TextEditingController
-      _email; // late means that value assigned post-initialization
-  late final TextEditingController _password;
-
   // we must define initState and dispose for our class variables we've defined.
   @override
   void initState() {
-    // initState() is called automatically when a page is loaded => useEffect
-    _email = TextEditingController();
-    _password = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    // dispose() is used to dispose the memory after the web page is no longer used.
-    _email.dispose();
-    _password.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    return const CardSwiper();
+  }
+}
+
+class CardSwiper extends StatelessWidget {
+  const CardSwiper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
-      body: Column(
-        children: [
-          TextField(
-            controller: _email,
-            decoration:
-                const InputDecoration(hintText: 'Enter your email here'),
-          ),
-          TextField(
-            controller: _password,
-            decoration:
-                const InputDecoration(hintText: 'Enter your password here'),
-          ),
-          TextButton(onPressed: () {}, child: const Text('Register')),
-        ],
-      ), // textbutton is stateful widget
-    ); // Scaffold is the default white space
+      backgroundColor: gradientEndColor,
+      body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [gradientStartColor, gradientEndColor],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: const [0.1, 0.9])),
+          child: SafeArea(
+            child: Column(children: <Widget>[
+              const HeaderWidget(),
+              SizedBox(
+                height: 600,
+                child: Swiper(
+                  itemCount: successInfo.length,
+                  itemWidth: MediaQuery.of(context).size.width,
+                  itemHeight: MediaQuery.of(context).size.height,
+                  layout: SwiperLayout.TINDER,
+                  pagination: SwiperPagination(
+                      builder: DotSwiperPaginationBuilder(
+                          color: dotColor,
+                          activeColor: contentTextColor,
+                          activeSize: 12,
+                          space: 4)),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation,
+                                    secondaryAnimation) =>
+                                DetailsPage(successInfo: successInfo[index]),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              const begin = Offset(1.0, 0.0);
+                              const end = Offset.zero;
+                              const curve = Curves.ease;
+                              final tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
+                              final offsetAnimation = animation.drive(tween);
+                              return SlideTransition(
+                                  position: offsetAnimation, child: child);
+                            },
+                          ),
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Column(
+                            children: [
+                              CustomCard(
+                                name: successInfo[index].name,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 400,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              child: Hero(
+                                  tag: successInfo[index].position,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(32),
+                                      child: Image.asset(
+                                          successInfo[index].iconImage,
+                                          fit: BoxFit.cover))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )
+            ]),
+          )),
+      bottomNavigationBar: const CustomBottomNavbar(),
+    );
   }
 }
